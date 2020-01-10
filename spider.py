@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # v1.0  selenium to get house data in Lianjia 01/04/2019
+# v1.1 update search results. Handle more situation
 
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
@@ -120,10 +121,16 @@ def test():
 def main():
 
 	temp_burl = LINK.split('/')
-	if temp_burl[-1] == "":
+	if temp_burl[-1] == "ershoufang":
+		base_url = LINK + "/{0}"
+	elif temp_burl[-1] == "" and temp_burl[-2] = "ershoufang":
+		base_url = LINK + "{0}"
+	elif temp_burl[-1] == "" and temp_burl[-3] == "ershoufang":
 		base_url = "/".join(temp_burl[0:-2]) + "/{0}" + temp_burl[-2] + "/"
+	elif temp_burl[-1] != "" and temp_burl[-2] == "ershoufang":
+		base_url = "/".join(temp_burl[0:-1]) + "/{0}" + temp_burl[-1] + "/"
 	else:
-		base_url = "/".join(temp_burl[0:-1]) + "/{0}" + temp_burl[-2] + "/"
+		raise ValueError("[Error]: invalid webpage link!\n")
 	house_urls, total_pages = get_house_urls(base_url.format(''), True)
 	time.sleep(2+random.uniform(0,2.0))
 
