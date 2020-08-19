@@ -125,9 +125,9 @@ def main():
 		base_url = LINK + "/{0}"
 	elif temp_burl[-1] == "" and temp_burl[-2] == "ershoufang":
 		base_url = LINK + "{0}"
-	elif temp_burl[-1] == "" and temp_burl[-3] == "ershoufang":
+	elif temp_burl[-1] == "" and temp_burl[-2] != "ershoufang":
 		base_url = "/".join(temp_burl[0:-2]) + "/{0}" + temp_burl[-2] + "/"
-	elif temp_burl[-1] != "" and temp_burl[-2] == "ershoufang":
+	elif temp_burl[-1] != "" and temp_burl[-1] != "ershoufang":
 		base_url = "/".join(temp_burl[0:-1]) + "/{0}" + temp_burl[-1] + "/"
 	else:
 		raise ValueError("[Error]: invalid webpage link!\n")
